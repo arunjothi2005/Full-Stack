@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planning and Approval</title>
+    <style>
+        body, html, canvas {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://img.lovepik.com/photo/45006/7371.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .event-content {
+            background-color: #d78484;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .event-banner {
+            width: 100%;
+            border-radius: 15px;
+        }
+        .event-details {
+            background-color: #94cca7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .event-title {
+            margin-bottom: 30px;
+            font-size: 20px;
+            line-height: 1.5;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .event-description {
+            margin-top: 10px;
+            font-size: 20px;
+            line-height: 1.4;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .signature-box {
+            background-color: #fff;
+            border: 2px solid #000;
+            width: 80%;
+            height: 100px;
+            border-radius: 10px;
+            position: relative;
+            margin-top: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        #signature-canvas {
+            width: 50%;
+            height: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+        .clear-signature {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: #f00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px; 
+        }
+        .approval-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            color: #f00;
+        }
+
+        .approval-symbol {
+            font-size: 40px;
+            cursor: pointer;
+            color: #151414;
+        }
+        .send-button {
+            padding: 10px 20px;
+            background-color: #D9D9D9;
+            border-radius: 45px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        @media (max-width: 991px) {
+            .event-content {
+                width: 100%;
+            }
+
+            .event-title {
+                font-size: 20px;
+            }
+
+            .event-description {
+                font-size: 16px;
+            }
+
+            .send-button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- In-Charge Page -->
+    <section class="event-planning">
+        <div class="event-content">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f27ecb9c39af9248c582838ce0b94339a74419f4180dd70b20ee89d0eda3fef5?placeholderIfAbsent=true&apiKey=708dcf5aa46643539bff3724465aea76" alt="Event banner" class="event-banner" />
+            <div class="event-details">
+                <h2 class="event-title">
+                    Subject: ........ <br />
+                    Financial Requirement: <span id="financial-requirement" style="font-size: 24px">Yes, ₹ 4000</span> Faculty ID: CS117 <br />
+                    Advance amount required: <span id="advance-amount" style="font-size: 20px">₹ 2000</span>
+                </h2>
+                <p class="event-description">
+                    The department event planning involves organizing and coordinating various departmental events, ensuring smooth execution from concept to completion. This includes managing logistics, budgeting, and liaising with stakeholders to create successful and engaging events.
+                </p>
+                <div class="signature-box">
+                    <canvas id="signature-canvas"></canvas>
+                    <button class="clear-signature" id="clear-signature">Clear</button>
+                </div>
+                <div class="approval-status">
+                    <div class="approval-symbol" id="approval-symbol">✔️</div>
+                    <button class="send-button" id="send-button">Send</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        const userFixedAmount = "₹.......";
+        const advanceAmount = "₹........."; 
+        document.getElementById('financial-requirement').textContent = `Yes, ${userFixedAmount}`;
+        document.getElementById('advance-amount').textContent = `${advanceAmount}`;
+        const canvas = document.getElementById('signature-canvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);
+        }
+        function draw(e) {
+            if (!isDrawing) return;
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.closePath();
+        }
+        document.getElementById('clear-signature').addEventListener('click', function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+
+        function isSignatureProvided() {
+            const blank = document.createElement('canvas');
+            blank.width = canvas.width;
+            blank.height = canvas.height;
+            return canvas.toDataURL() !== blank.toDataURL();
+        }
+
+        document.getElementById('send-button').addEventListener('click', function() {
+            if (!isSignatureProvided()) {
+                alert("Please provide a signature before sending.");
+                return;
+            }
+            alert("The event has been approved and sent for further processing.");
+        });
+
+        document.getElementById('approval-symbol').addEventListener('click', function() {
+            if (confirm("Approve this event?")) {
+                document.getElementById('approval-symbol').classList.add('approved');
+                document.getElementById('approval-symbol').textContent = "✅"; 
+                alert("Event Approved!");
+            }
+        });
+    </script>
+</body>
+</html>
