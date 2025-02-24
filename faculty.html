@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Event Form Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/019/605/525/small_2x/abstract-premium-black-and-gold-geometric-background-square-diamond-shape-golden-frame-on-royal-blue-background-award-background-luxury-background-modern-template-social-media-post-vector.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .login-container, .event-form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container {
+            width: 400px;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .header img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .login-form-wrapper {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .login-form-wrapper img.avatar {
+            width: 67px;
+            height: 59px;
+            border-radius: 50%;
+        }
+
+        .form-container {
+            margin-top: 30px;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .form-row label {
+            flex: 1;
+            font-size: 19px;
+            text-align: left;
+        }
+
+        .form-row input {
+            flex: 2;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .login-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .login-button:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .event-form-container {
+            width: 600px;
+            max-width: 100%;
+            display: none; /* Initially hidden */
+        }
+
+        .header-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-body {
+            margin-top: 20px;
+        }
+
+        .form-fields {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-fields select,
+        .form-fields input,
+        .form-fields textarea {
+            margin-bottom: 20px;
+            font-size: 14px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .form-fields fieldset {
+            padding: 20px;
+            border: 1px solid #d5d3d3;
+            border-radius: 5px;
+        }
+
+        .form-fields fieldset legend {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .form-fields button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-fields button:hover {
+            background-color: #45a049;
+        }
+        #department-requirements,
+        #special-lab-requirements,
+        #clubs-requirements,
+        #hardware-requirements {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-page" class="login-container">
+        <header class="header">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/245ec23991f1e367b57982fb5357b2379ecbc4a11e24a9e7f93ae1cbf1cde373" alt="Header Image">
+        </header>
+        <main class="login-form-wrapper">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/349cc15c9c4be7eadf5b2e6745fa8beceb2258219e9ec9d877ff08c3f1c328a0" alt="User Avatar" class="avatar">
+            <form class="form-container" onsubmit="validateLogin(event)">
+                <div class="form-row">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Enter Your Email" required>
+                </div>
+                <div class="form-row">
+                    <label for="faculty-id">Faculty ID:</label>
+                    <input type="text" id="faculty-id" placeholder="Faculty ID" required>
+                </div>
+                <div class="error-message" id="error-message"></div>
+                <button type="submit" class="login-button">LOGIN</button>
+            </form>
+        </main>
+    </div>
+        <div id="event-form-page" class="event-form-container">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f27ecb9c39af9248c582838ce0b94339a74419f4180dd70b20ee89d0eda3fef5" alt="Event Header Image" class="header-image">
+        <div class="form-body">
+            <form class="form-fields" onsubmit="submitForm(event)">
+                <div class="form-field">
+                    <label for="event-date">Event Date:</label>
+                    <input type="date" id="event-date" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="name-dept">Mention Name:</label>
+                    <select id="name-dept" required onchange="handleMentionNameChange(this)">
+                        <option value="">Select an option</option>
+
+                        <option value="department">Department</option>
+                        <option value="special-lab">Special Lab</option>
+                        <option value="clubs">Clubs & Societies</option>
+                        <option value="hardware-requirements">Hardware Requirements</option>
+                        <option value="other">Other Requirement</option>
+                    </select>
+                </div>
+                <!-- Amount Section -->
+                <div class="form-field">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" placeholder="Enter the amount" required>
+                </div>
+                <!-- Department Requirements -->
+                <div id="department-requirements" class="hidden">
+                    <label for="department-req">Department Requirement:</label>
+                    <input type="text" id="department-req" placeholder="Enter requirement">
+                </div>
+                <!-- Special Lab Requirements -->
+                <div id="special-lab-requirements" class="hidden">
+                    <label for="lab-req">Special Lab Requirement:</label>
+                    <input type="text" id="lab-req" placeholder="Enter requirement">
+                </div>
+                <!-- Clubs Requirements -->
+                <div id="clubs-requirements" class="hidden">
+                    <label for="clubs-req">Clubs Requirement:</label>
+                    <input type="text" id="clubs-req" placeholder="Enter requirement">
+                </div>
+                <!-- Hardware Requirements -->
+                <div id="hardware-requirements" class="hidden">
+                    <label for="cup">Cup:</label>
+                    <input type="number" id="cup" placeholder="Quantity">
+                    <label for="chair">Chair:</label>
+                    <input type="number" id="chair" placeholder="Quantity">
+                </div>
+                <div class="form-field">
+                    <label for="reason">Reason:</label>
+                    <textarea id="reason" rows="3" placeholder="Enter reason" required></textarea>
+                </div>
+                <button type="submit" class="login-button">Submit Event</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function validateLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const facultyId = document.getElementById('faculty-id').value;
+            const errorMessage = document.getElementById('error-message');
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@bitsathy\.ac\.in$/;
+            if (!emailPattern.test(email)) {
+                errorMessage.innerText = "Please enter a valid email address.";
+                return;
+            }
+            errorMessage.innerText = "";
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('event-form-page').style.display = 'block';
+        }
+        function handleMentionNameChange(selectElement) {
+            const selectedValue = selectElement.value;
+            document.getElementById('department-requirements').style.display = 'none';
+            document.getElementById('special-lab-requirements').style.display = 'none';
+            document.getElementById('clubs-requirements').style.display = 'none';
+            document.getElementById('hardware-requirements').style.display = 'none';
+            if (selectedValue) {
+                document.getElementById(selectedValue + '-requirements').style.display = 'block';
+            }
+        }
+        function submitForm(event) {
+            event.preventDefault();
+            const eventData = {
+                date: document.getElementById('event-date').value,
+                nameDept: document.getElementById('name-dept').value,
+                amount: document.getElementById('amount').value,
+                reason: document.getElementById('reason').value,
+            };
+            if (eventData.nameDept === 'department') {
+                eventData.departmentReq = document.getElementById('department-req').value;
+            } else if (eventData.nameDept === 'special-lab') {
+                eventData.labReq = document.getElementById('lab-req').value;
+            } else if (eventData.nameDept === 'clubs') {
+                eventData.clubsReq = document.getElementById('clubs-req').value;
+            } else if (eventData.nameDept === 'hardware-requirements') {
+                eventData.cup = document.getElementById('cup').value;
+                eventData.chair = document.getElementById('chair').value;
+            }
+            fetch('http://localhost:5000/api/submit-event', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(eventData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
