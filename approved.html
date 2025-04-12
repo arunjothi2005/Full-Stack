@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <style>
+        body {
+            font-family:'Times New Roman', Times, serif;
+            background-color: #f0f0f0;
+            margin: 20;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            width: 60;
+            position: relative;
+        }
+        .event-details {
+            background-color: #f6f6f7;
+            color: #1a1919;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .event-container {
+            background-color: #d9d9d9;
+            max-width: 500px;
+            max-height: 500px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        .event-image {
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 5px solid #a024da;
+        }
+        .details-wrapper {
+            background-color: #f7fbff;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .event-info h1 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom:6px;
+            margin-top: 2px;
+            color: green;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .event-info h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+       .event-info p {
+            font-size: 20px;
+            margin: 5px 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .action-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 20px;
+        }
+       .action-button, .secondary-button {
+            background-color: #7256cb;
+            border: none;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 48%;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .action-button:hover, .secondary-button:hover {
+            background-color: #c0c0c0;
+        }
+       .seal-image {
+            position: absolute;
+            top: 50%;
+            left: 75%;
+            width: 130px; 
+            height: 130px; 
+            transform: translate(-50%, -50%) rotate(-40deg);
+            opacity: 0.9;
+            z-index: 6;
+            pointer-events: none;
+        }
+        @media (max-width: 991px) {
+            .details-wrapper {
+                padding: 20px;
+            }
+            .event-info h2 {
+                font-size: 24px;
+            }
+            .event-info p {
+                font-size: 18px;
+            }
+            .action-button, .secondary-button {
+                font-size: 16px;
+            }
+            .seal-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="event-details">
+        <div class="event-container">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f27ecb9c39af9248c582838ce0b94339a74419f4180dd70b20ee89d0eda3fef5?placeholderIfAbsent=true&apiKey=708dcf5aa46643539bff3724465aea76" alt="Event banner" class="event-image" />
+            <div class="details-wrapper">
+                <article class="event-info">
+                    <h1><span>Approved</span></h1>
+                    <h2>Subject: <span>CSE Dept Event</span></h2>
+                    <p>Financial Requirement: <span>Yes, ₹ 4000</span></p>
+                    <p>Advance amount required: <span>₹ 2000</span></p>
+                    <p>Mention Name: <span>CSE DEPT</span></p>
+                    <p>Faculty Responsible: <span>CS117</span></p>
+                    <p>Requirements: <span>Accommodation Vehicle</span></p>
+                    <p><span>Food & Refreshment</span></p>
+                </article>
+
+                <div class="action-container">
+                    <button class="action-button">Back</button>
+                    <button class="secondary-button" aria-label="Additional action">Download</button>
+                </div>
+            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Bannari_Amman_Institute_of_Technology_logo.png/220px-Bannari_Amman_Institute_of_Technology_logo.png" alt="Seal" class="seal-image">
+
+        </div>
+    </section>
+</body>
+</html>
